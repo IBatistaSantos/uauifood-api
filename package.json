@@ -1,0 +1,46 @@
+{
+  "name": "api-uaifood",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.1",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^17.0.40",
+    "@typescript-eslint/eslint-plugin": "4.0.1",
+    "eslint": "7.12.1",
+    "eslint-config-standard-with-typescript": "^21.0.1",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.0.0",
+    "husky": "^8.0.1",
+    "jest": "^28.1.0",
+    "jest-mock-extended": "^2.0.6",
+    "lint-staged": "^13.0.0",
+    "prisma": "^3.14.0",
+    "ts-jest": "^28.0.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "4.6.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.14.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.1",
+    "module-alias": "^2.2.2"
+  },
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only -r dotenv/config src/main",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "test:watch": "npm run test -- --watch",
+    "test:staged": "npm run test -- --findRelatedTests",
+    "test:cov": "npm run test -- --coverage",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
+  },
+  "prisma": {
+    "schema": "./src/infra/db/prisma/schema.prisma"
+  }
+}
