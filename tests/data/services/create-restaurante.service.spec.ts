@@ -1,5 +1,5 @@
 import { Hasher } from '@/data/contracts/crypto'
-import { LoadRestaurantByNameRepository, LoadUserAccountRepository, SaveRestaurantRepository, SaveUserAccountRepository } from '@/data/contracts/repos'
+import { LoadRestaurantByNameRepository, LoadUserAccountByEmailRepository, SaveRestaurantRepository, SaveUserAccountRepository } from '@/data/contracts/repos'
 import { CreateRestaurantService } from '@/data/services'
 import { TypeCuisine } from '@/domain/entities'
 import { UserAlreadyExistsError } from '@/domain/errors'
@@ -8,7 +8,7 @@ import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('CreateRestaurantService', () => {
   let sut: CreateRestaurantService
-  let userAccountRepository: MockProxy<SaveUserAccountRepository & LoadUserAccountRepository>
+  let userAccountRepository: MockProxy<SaveUserAccountRepository & LoadUserAccountByEmailRepository>
   let restaurantRepository: MockProxy<SaveRestaurantRepository & LoadRestaurantByNameRepository>
   let hasher: MockProxy<Hasher>
 
@@ -17,7 +17,7 @@ describe('CreateRestaurantService', () => {
     restaurantRepository = mock()
     hasher = mock()
 
-    userAccountRepository.load.mockResolvedValue(undefined)
+    userAccountRepository.loadByEmail.mockResolvedValue(undefined)
     restaurantRepository.load.mockResolvedValue(undefined)
     hasher.hash.mockResolvedValue('hashed-password')
 
@@ -50,12 +50,12 @@ describe('CreateRestaurantService', () => {
       }
     })
 
-    expect(userAccountRepository.load).toHaveBeenCalledWith({ email: 'any_email' })
-    expect(userAccountRepository.load).toHaveBeenCalledTimes(1)
+    expect(userAccountRepository.loadByEmail).toHaveBeenCalledWith({ email: 'any_email' })
+    expect(userAccountRepository.loadByEmail).toHaveBeenCalledTimes(1)
   })
 
   it('should return UserAlreadyExistsError when userAccountRepository.load retuns a user', async () => {
-    userAccountRepository.load.mockResolvedValueOnce({
+    userAccountRepository.loadByEmail.mockResolvedValueOnce({
       id: '1',
       email: 'any_email',
       name: 'any_name',

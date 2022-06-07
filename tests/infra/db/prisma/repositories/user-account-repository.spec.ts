@@ -35,14 +35,14 @@ describe('UserAccountRepositoryPrisma', () => {
   })
 
   it('should return account when load returning account', async () => {
-    const result = await sut.load({ email: account.email })
+    const result = await sut.loadByEmail({ email: account.email })
     expect(result).toHaveProperty('id')
     expect(result?.email).toEqual(account.email)
   })
 
   it('should return null when load returning null', async () => {
     prismaMock.user.findFirst.mockResolvedValueOnce(null)
-    const result = await sut.load({ email: account.email })
+    const result = await sut.loadByEmail({ email: account.email })
     expect(result).toBe(undefined)
   })
 

@@ -1,10 +1,20 @@
 import { PrismaClient } from '@prisma/client'
-import { LoadUserAccountRepository, SaveUserAccountRepository } from '@/data/contracts/repos'
+import { LoadUserAccountByEmailRepository, SaveUserAccountRepository } from '@/data/contracts/repos'
 
-export class UserAccountRepositoryPrisma implements SaveUserAccountRepository, LoadUserAccountRepository {
+export class UserAccountRepositoryPrisma implements SaveUserAccountRepository, LoadUserAccountByEmailRepository {
   constructor (
     private readonly prismaClient: PrismaClient
   ) {}
+
+  async loadByEmail (params: LoadUserAccountByEmailRepository.Params): Promise<LoadUserAccountByEmailRepository.Result> {
+    const user = await this.prismaClient.user.findFirst({
+      where: {
+        email: params.email
+      }
+    })
+
+    return user ?? undefined
+  }
 
   async save (params: SaveUserAccountRepository.Params): Promise<SaveUserAccountRepository.Result> {
     return this.prismaClient.user.create({
@@ -14,15 +24,5 @@ export class UserAccountRepositoryPrisma implements SaveUserAccountRepository, L
         name: params.name
       }
     })
-  }
-
-  async load (params: LoadUserAccountRepository.Params): Promise<LoadUserAccountRepository.Result> {
-    const user = await this.prismaClient.user.findFirst({
-      where: {
-        email: params.email
-      }
-    })
-
-    return user ?? undefined
   }
 }

@@ -1,4 +1,4 @@
-import { AuthenticationController } from '@/application/controllers'
+import { CreateRestaurantController } from '@/application/controllers'
 import { TypeCuisine } from '@/domain/entities'
 import { CreateRestaurant } from '@/domain/features'
 
@@ -6,7 +6,7 @@ import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('CreateRestaurantController', () => {
   let createRestaurantService: MockProxy<CreateRestaurant>
-  let sut: AuthenticationController
+  let sut: CreateRestaurantController
 
   beforeAll(() => {
     createRestaurantService = mock()
@@ -23,7 +23,7 @@ describe('CreateRestaurantController', () => {
   })
 
   beforeEach(() => {
-    sut = new AuthenticationController(createRestaurantService)
+    sut = new CreateRestaurantController(createRestaurantService)
   })
 
   it('should call CreateRestaurantService with correct parameters', async () => {

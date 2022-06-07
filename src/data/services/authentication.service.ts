@@ -1,17 +1,17 @@
 import { AuthenticationError } from '@/domain/errors/authentication'
 import { Authentication } from '@/domain/features/authentication'
 import { Encrypter, HasherComparer } from '../contracts/crypto'
-import { LoadUserAccountRepository } from '../contracts/repos'
+import { LoadUserAccountByEmailRepository } from '../contracts/repos'
 
 export class AuthenticationService implements Authentication {
   constructor (
-    private readonly userAccountRepository: LoadUserAccountRepository,
+    private readonly userAccountRepository: LoadUserAccountByEmailRepository,
     private readonly hasherComparer: HasherComparer,
     private readonly encrypter: Encrypter
   ) {}
 
   async execute (params: Authentication.Params): Promise<any> {
-    const user = await this.userAccountRepository.load({ email: params.email })
+    const user = await this.userAccountRepository.loadByEmail({ email: params.email })
 
     if (user === undefined) {
       return new AuthenticationError()

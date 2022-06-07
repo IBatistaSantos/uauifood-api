@@ -2,11 +2,11 @@ import { UserAlreadyExistsError } from '@/domain/errors'
 import { RestaurantAlreadyExistsError } from '@/domain/errors/restaurant-already-exists'
 import { CreateRestaurant } from '@/domain/features'
 import { Hasher } from '../contracts/crypto'
-import { LoadRestaurantByNameRepository, LoadUserAccountRepository, SaveRestaurantRepository, SaveUserAccountRepository } from '../contracts/repos'
+import { LoadRestaurantByNameRepository, LoadUserAccountByEmailRepository, SaveRestaurantRepository, SaveUserAccountRepository } from '../contracts/repos'
 
 export class CreateRestaurantService implements CreateRestaurant {
   constructor (
-    private readonly userAccountRepository: SaveUserAccountRepository & LoadUserAccountRepository,
+    private readonly userAccountRepository: SaveUserAccountRepository & LoadUserAccountByEmailRepository,
     private readonly restaurantRepository: SaveRestaurantRepository & LoadRestaurantByNameRepository,
     private readonly hasher: Hasher
   ) {}
@@ -14,7 +14,7 @@ export class CreateRestaurantService implements CreateRestaurant {
   async execute (params: CreateRestaurant.Params): Promise<CreateRestaurant.Result> {
     const { name, typeCuisine, owner } = params
 
-    const user = await this.userAccountRepository.load({ email: owner.email })
+    const user = await this.userAccountRepository.loadByEmail({ email: owner.email })
 
     if (user !== undefined) {
       return new UserAlreadyExistsError(name)

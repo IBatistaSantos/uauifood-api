@@ -1,5 +1,5 @@
 import { Encrypter, HasherComparer } from '@/data/contracts/crypto'
-import { LoadUserAccountRepository } from '@/data/contracts/repos'
+import { LoadUserAccountByEmailRepository } from '@/data/contracts/repos'
 import { AuthenticationService } from '@/data/services'
 
 import { AuthenticationError } from '@/domain/errors/authentication'
@@ -7,7 +7,7 @@ import { mock, MockProxy } from 'jest-mock-extended'
 
 describe('AuthenticationService', () => {
   let sut: AuthenticationService
-  let userAccountRepository: MockProxy<LoadUserAccountRepository>
+  let userAccountRepository: MockProxy<LoadUserAccountByEmailRepository>
   let hasher: MockProxy<HasherComparer>
   let encrypter: MockProxy<Encrypter>
 
@@ -16,7 +16,7 @@ describe('AuthenticationService', () => {
     encrypter = mock()
     hasher = mock()
 
-    userAccountRepository.load.mockResolvedValue({
+    userAccountRepository.loadByEmail.mockResolvedValue({
       id: '1',
       email: 'any_email',
       name: 'any_name',
@@ -36,12 +36,12 @@ describe('AuthenticationService', () => {
       password: 'any_password'
     })
 
-    expect(userAccountRepository.load).toHaveBeenCalledWith({ email: 'any_email' })
-    expect(userAccountRepository.load).toHaveBeenCalledTimes(1)
+    expect(userAccountRepository.loadByEmail).toHaveBeenCalledWith({ email: 'any_email' })
+    expect(userAccountRepository.loadByEmail).toHaveBeenCalledTimes(1)
   })
 
   it('should return AuthenticationError when userAccountRepository.load retuns a user', async () => {
-    userAccountRepository.load.mockResolvedValueOnce(undefined)
+    userAccountRepository.loadByEmail.mockResolvedValueOnce(undefined)
 
     const result = await sut.execute({
       email: 'any_email',
