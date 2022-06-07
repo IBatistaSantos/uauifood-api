@@ -58,7 +58,8 @@ describe('CreateRestaurantService', () => {
     userAccountRepository.load.mockResolvedValueOnce({
       id: '1',
       email: 'any_email',
-      name: 'any_name'
+      name: 'any_name',
+      password: 'any_password'
     })
 
     const result = await sut.execute({
