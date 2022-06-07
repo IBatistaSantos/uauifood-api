@@ -18,12 +18,12 @@ type HttpRequest = {
 type Model = Error | Restaurant
 
 export class CreateRestaurantController extends Controller {
-  constructor (private readonly addresse: CreateRestaurant) {
+  constructor (private readonly createRestaurant: CreateRestaurant) {
     super()
   }
 
   async perform (httpRequest: HttpRequest): Promise<HttpResponse<Model>> {
-    const data = await this.addresse.execute({
+    const data = await this.createRestaurant.execute({
       name: httpRequest.name,
       typeCuisine: httpRequest.typeCuisine as TypeCuisine,
       owner: {
