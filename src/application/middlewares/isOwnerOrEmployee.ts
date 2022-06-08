@@ -14,7 +14,7 @@ type Result = Error | { userId: string }
 
 export type IsOwnerOrEmployeRestaurant = (params: { userId: string, restaurantId: string }) => Promise<boolean>
 
-export class CanMiddleware implements Middleware {
+export class IsOwnerOrEmployeMiddleware implements Middleware {
   constructor (
     private readonly restaurantRepository: IsOwnerOrEmployeRestaurant
   ) {}

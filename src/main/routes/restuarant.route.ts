@@ -9,12 +9,12 @@ import {
   makeDeleteRestaurantController
 } from '../factories/application/controllers'
 import { auth } from '../middlewares'
-import { can } from '../middlewares/can'
+import { is } from '../middlewares/isOwnerOrEmployee'
 
 export default (router: Router): void => {
   router.get('/restaurant/:restaurantId', auth, adapt((makeDetailsRestaurantController())))
   router.get('/restaurant', adapt((makeListRestaurantController())))
   router.post('/restaurant', adapt((makeCreateRestaurantController())))
-  router.put('/restaurant/:restaurantId', auth, can, adapt((makeUpdateRestaurantController())))
-  router.delete('/restaurant/:restaurantId', auth, adapt((makeDeleteRestaurantController())))
+  router.put('/restaurant/:restaurantId', auth, is, adapt((makeUpdateRestaurantController())))
+  router.delete('/restaurant/:restaurantId', auth, is, adapt((makeDeleteRestaurantController())))
 }
