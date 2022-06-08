@@ -20,6 +20,16 @@ export interface ListRestaurantRepository {
   listAll: (params: ListRestaurantRepository.Params) => Promise<ListRestaurantRepository.Result>
 }
 
+export interface DeleteRestaurantByIdRepository {
+  delete: (params: DeleteRestaurantByIdRepository.Params) => Promise<void>
+}
+
+export namespace DeleteRestaurantByIdRepository {
+  export type Params = {
+    restaurantId: string
+  }
+}
+
 export namespace UpdateRestaurantRepository {
   export type Params = {
     restaurantId: string

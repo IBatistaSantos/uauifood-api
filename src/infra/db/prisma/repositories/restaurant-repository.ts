@@ -1,5 +1,12 @@
 import { PrismaClient } from '@prisma/client'
-import { ListRestaurantRepository, LoadRestaurantByIdRepository, LoadRestaurantByNameRepository, SaveRestaurantRepository, UpdateRestaurantRepository } from '@/data/contracts/repos'
+import {
+  ListRestaurantRepository,
+  LoadRestaurantByIdRepository,
+  LoadRestaurantByNameRepository,
+  SaveRestaurantRepository,
+  UpdateRestaurantRepository,
+  DeleteRestaurantByIdRepository
+} from '@/data/contracts/repos'
 import { TypeCuisine } from '@/domain/features'
 
 export class RestaurantRepositoryPrisma implements
@@ -7,15 +14,28 @@ SaveRestaurantRepository,
 LoadRestaurantByNameRepository,
 LoadRestaurantByIdRepository,
 UpdateRestaurantRepository,
+DeleteRestaurantByIdRepository,
 ListRestaurantRepository {
   constructor (
     private readonly prismaClient: PrismaClient
   ) {}
 
+  async delete (params: DeleteRestaurantByIdRepository.Params): Promise<void> {
+    await this.prismaClient.restaurant.update({
+      where: {
+        id: params.restaurantId
+      },
+      data: {
+        active: false
+      }
+    })
+  }
+
   async listAll (params: ListRestaurantRepository.Params): Promise<ListRestaurantRepository.Result> {
+    const { active } = params
     const restaurants = await this.prismaClient.restaurant.findMany({
       where: {
-        active: params.active
+        active: active ?? true
       },
       include: {
         owner: true

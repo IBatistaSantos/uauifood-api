@@ -16,7 +16,12 @@ describe('UpdateRestaurantService', () => {
       id: '1',
       name: 'any_name_restaurant',
       typeCuisine: TypeCuisine.Pizza,
-      ownerId: '1'
+      ownerId: '1',
+      owner: {
+        id: '1',
+        name: 'any_name_owner',
+        email: 'any_email_owner'
+      }
     })
 
     restaurantRepository.update.mockResolvedValue({

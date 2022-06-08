@@ -6,7 +6,6 @@ export class JwtAdapter implements Encrypter, Decrypter {
     const { token } = params
     const [,tokenFormatted] = token.split(' ')
     const { value } = verify(tokenFormatted, this.secret) as JwtPayload
-
     return value
   }
 

@@ -40,4 +40,31 @@ describe('JwtAdapter', () => {
       await expect(promise).rejects.toThrow(new Error('token_error'))
     })
   })
+
+  describe('validate', () => {
+    let token: string
+    let value: string
+    beforeAll(() => {
+      token = 'Bearer any_token'
+      value = 'any_id'
+      fakeJwt.verify.mockImplementation(() => ({ value }))
+    })
+
+    it('should call verify with correct parameters', async () => {
+      const jwtSpy = jest.spyOn(jwt, 'verify')
+      await sut.validate({ token })
+      expect(jwtSpy).toHaveBeenCalledWith('any_token', secret)
+    })
+
+    it('should return a value from verify with correct values', async () => {
+      const result = await sut.validate({ token })
+      expect(result).toBe(value)
+    })
+
+    it('should rethrow if verify throws', async () => {
+      fakeJwt.verify.mockImplementationOnce(() => { throw new Error('token_error') })
+      const promise = sut.validate({ token })
+      await expect(promise).rejects.toThrow(new Error('token_error'))
+    })
+  })
 })
