@@ -41,11 +41,13 @@ SaveMenuRepository {
   }
 
   async loadById (params: LoadMenuById.Params): Promise<LoadMenuById.Result> {
-    return this.prismaClient.menu.findFirst({
+    const menu = await this.prismaClient.menu.findFirst({
       where: {
         id: params.itemId
       }
     })
+
+    return menu ?? undefined
   }
 
   async loadByRestaurantId (params: LoadMenuByRestaurantId.Params): Promise<LoadMenuByRestaurantId.Result> {

@@ -40,7 +40,7 @@ export namespace LoadMenuById {
     itemId: string
   }
 
-  export type Result = null | Menu
+  export type Result = undefined | Menu
 }
 
 export namespace LoadMenuByNAmeAndRestaurantId {
