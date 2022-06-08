@@ -33,6 +33,7 @@ describe('RestaurantRepositoryPrisma', () => {
 
     prismaMock.restaurant.findFirst.mockResolvedValue(restaurant)
     prismaMock.restaurant.create.mockResolvedValue(restaurant)
+    prismaMock.restaurant.update.mockResolvedValue(restaurant)
   })
 
   it('should return restaurant when load returning a restaurant', async () => {
@@ -44,7 +45,7 @@ describe('RestaurantRepositoryPrisma', () => {
   it('should return null when load returning null', async () => {
     prismaMock.restaurant.findFirst.mockResolvedValueOnce(null)
     const result = await sut.load({ name: restaurant.name })
-    expect(result).toBe(undefined)
+    expect(result).toBeUndefined()
   })
 
   it('should create new restaurant', async () => {
@@ -52,5 +53,26 @@ describe('RestaurantRepositoryPrisma', () => {
 
     expect(result).toHaveProperty('id')
     expect(result?.name).toEqual(restaurant.name)
+  })
+
+  it('should update restaurant', async () => {
+    const result = await sut.update(restaurant)
+
+    expect(result).toHaveProperty('id')
+    expect(result?.name).toEqual(restaurant.name)
+  })
+
+  it('should load by id restaurant', async () => {
+    const result = await sut.loadById(restaurant.id)
+
+    expect(result).toHaveProperty('id')
+    expect(result?.name).toEqual(restaurant.name)
+  })
+
+  it('should return undefined when update throws', async () => {
+    prismaMock.restaurant.update.mockRejectedValueOnce(new Error('update error'))
+
+    const result = await sut.update(restaurant)
+    expect(result).toBeUndefined()
   })
 })

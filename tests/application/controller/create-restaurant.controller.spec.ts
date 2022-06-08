@@ -49,7 +49,7 @@ describe('CreateRestaurantController', () => {
     expect(createRestaurantService.execute).toHaveBeenCalledTimes(1)
   })
 
-  it('should return 200 if average calculation succeeds', async () => {
+  it('should return 200 if CreateRestaurantService succeeds', async () => {
     const httpResponse = await sut.handle({
       name: 'any_name',
       typeCuisine: TypeCuisine.Pizza,
