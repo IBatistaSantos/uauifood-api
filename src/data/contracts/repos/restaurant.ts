@@ -26,7 +26,7 @@ export interface DeleteRestaurantByIdRepository {
 
 export namespace DeleteRestaurantByIdRepository {
   export type Params = {
-    restaurantId: string
+    itemId: string
   }
 }
 
