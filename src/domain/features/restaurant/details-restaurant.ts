@@ -1,4 +1,4 @@
-import { Restaurant } from '../entities'
+import { Restaurant } from '../../entities'
 
 export interface DetailsRestaurant {
   execute: (params: DetailsRestaurant.Params) => Promise<DetailsRestaurant.Result>

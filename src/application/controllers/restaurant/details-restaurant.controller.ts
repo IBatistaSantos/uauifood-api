@@ -1,9 +1,9 @@
 import { DetailsRestaurant } from '@/domain/features'
 import { Restaurant } from '@/domain/entities'
 
-import { badRequest, HttpResponse, ok } from '../helpers'
-import { Controller } from './controller'
-import { ValidationBuilder, Validator } from '../validation'
+import { badRequest, HttpResponse, ok } from '../../helpers'
+import { Controller } from '../controller'
+import { ValidationBuilder, Validator } from '../../validation'
 
 type HttpRequest = {
   restaurantId: string

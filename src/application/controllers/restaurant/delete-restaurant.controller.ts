@@ -1,8 +1,8 @@
 import { DeleteRestaurant } from '@/domain/features'
 
-import { HttpResponse, ok } from '../helpers'
-import { Controller } from './controller'
-import { ValidationBuilder, Validator } from '../validation'
+import { HttpResponse, ok } from '../../helpers'
+import { Controller } from '../controller'
+import { ValidationBuilder, Validator } from '../../validation'
 
 type HttpRequest = {
   restaurantId: string

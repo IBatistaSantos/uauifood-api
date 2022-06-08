@@ -3,7 +3,7 @@ import { RestaurantNotFoundError, UpdateFailedError } from '@/domain/errors'
 
 import { UpdateRestaurant } from '@/domain/features'
 
-import { LoadRestaurantByIdRepository, UpdateRestaurantRepository } from '../contracts/repos'
+import { LoadRestaurantByIdRepository, UpdateRestaurantRepository } from '../../contracts/repos'
 
 export class UpdateRestaurantService implements UpdateRestaurant {
   constructor (

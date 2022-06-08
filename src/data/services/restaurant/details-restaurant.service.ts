@@ -1,7 +1,7 @@
 import { TypeCuisine } from '@/domain/entities'
 import { RestaurantNotFoundError } from '@/domain/errors'
 import { DetailsRestaurant } from '@/domain/features'
-import { LoadRestaurantByIdRepository } from '../contracts/repos'
+import { LoadRestaurantByIdRepository } from '../../contracts/repos'
 
 export class DetailsRestaurantService implements DetailsRestaurant {
   constructor (private readonly restaurantRepository: LoadRestaurantByIdRepository) {}

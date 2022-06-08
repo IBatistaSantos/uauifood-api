@@ -1,5 +1,5 @@
 import { ListRestaurant } from '@/domain/features'
-import { ListRestaurantRepository } from '../contracts/repos'
+import { ListRestaurantRepository } from '../../contracts/repos'
 
 export class ListRestaurantService implements ListRestaurant {
   constructor (private readonly restaurantRepository: ListRestaurantRepository) {}

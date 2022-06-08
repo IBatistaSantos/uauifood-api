@@ -1,7 +1,7 @@
 import { ListRestaurant } from '@/domain/features'
 
-import { badRequest, HttpResponse, ok } from '../helpers'
-import { Controller } from './controller'
+import { badRequest, HttpResponse, ok } from '../../helpers'
+import { Controller } from '../controller'
 
 type HttpRequest = {
   restaurantId: string

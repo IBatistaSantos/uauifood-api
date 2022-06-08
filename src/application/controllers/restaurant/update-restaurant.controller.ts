@@ -1,8 +1,8 @@
 import { UpdateRestaurant } from '@/domain/features'
 import { Restaurant, TypeCuisine } from '@/domain/entities'
 
-import { badRequest, HttpResponse, ok } from '../helpers'
-import { Controller } from './controller'
+import { badRequest, HttpResponse, ok } from '../../helpers'
+import { Controller } from '../controller'
 
 type HttpRequest = {
   name?: string

@@ -1,0 +1,5 @@
+export * from './create-restaurant.controller'
+export * from './delete-restaurant.controller'
+export * from './details-restaurant.controller'
+export * from './list-restaurant.controller'
+export * from './update-restaurant.controller'

@@ -1,8 +1,8 @@
 import { UserAlreadyExistsError } from '@/domain/errors'
 import { RestaurantAlreadyExistsError } from '@/domain/errors/restaurant-already-exists'
 import { CreateRestaurant } from '@/domain/features'
-import { Hasher } from '../contracts/crypto'
-import { LoadRestaurantByNameRepository, LoadUserAccountByEmailRepository, SaveRestaurantRepository, SaveUserAccountRepository } from '../contracts/repos'
+import { Hasher } from '../../contracts/crypto'
+import { LoadRestaurantByNameRepository, LoadUserAccountByEmailRepository, SaveRestaurantRepository, SaveUserAccountRepository } from '../../contracts/repos'
 
 export class CreateRestaurantService implements CreateRestaurant {
   constructor (

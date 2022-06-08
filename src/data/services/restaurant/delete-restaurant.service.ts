@@ -1,5 +1,5 @@
 import { DeleteRestaurant } from '@/domain/features'
-import { DeleteRestaurantByIdRepository } from '../contracts/repos'
+import { DeleteRestaurantByIdRepository } from '../../contracts/repos'
 
 export class DeleteRestaurantService implements DeleteRestaurant {
   constructor (private readonly restaurantRepository: DeleteRestaurantByIdRepository) {}
