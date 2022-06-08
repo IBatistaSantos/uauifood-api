@@ -3,7 +3,9 @@ import { Middleware } from '@/application/middlewares'
 import { RequiredFieldValidator } from '@/application/validation'
 
 type HttpRequest = {
-  authorization: string
+  headers: {
+    authorization: string
+  }
 }
 
 type Result = Error | { userId: string }
@@ -15,7 +17,7 @@ export class AuthenticationMiddleware implements Middleware {
     private readonly authorize: Authorize
   ) {}
 
-  async handle ({ authorization }: HttpRequest): Promise<HttpResponse<Result>> {
+  async handle ({ headers: { authorization } }: HttpRequest): Promise<HttpResponse<Result>> {
     if (this.validate(authorization)) {
       return unauthorized()
     }

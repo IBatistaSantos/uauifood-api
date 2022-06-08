@@ -6,9 +6,15 @@ import { Middleware } from '@/application/middlewares'
 export type ExpressMiddleware = (middleware: Middleware) => RequestHandler
 
 export const adaptExpressMiddleware: ExpressMiddleware = (middleware) => async (req, res, next) => {
-  const { headers } = req
+  const { headers, params, body, locals } = req
 
-  const { statusCode, data } = await middleware.handle(headers)
+  const httpRequest = {
+    headers,
+    params,
+    body,
+    locals
+  }
+  const { statusCode, data } = await middleware.handle(httpRequest)
 
   if (statusCode >= 400) {
     return res.status(statusCode).send({ error: data.message })

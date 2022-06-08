@@ -118,4 +118,21 @@ ListRestaurantRepository {
 
     return restaurant ?? undefined
   }
+
+  async isOwnerOrEmploye (params: {userId: string, restaurantId: string}): Promise<boolean> {
+    const restaurant = await this.prismaClient.restaurant.findFirst({
+      where: {
+        id: params.restaurantId
+      },
+      include: {
+        owner: true
+      }
+    })
+
+    if (restaurant === null) {
+      return false
+    }
+
+    return restaurant.owner.id === params.userId
+  }
 }
