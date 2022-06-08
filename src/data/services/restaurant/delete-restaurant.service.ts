@@ -7,6 +7,6 @@ export class DeleteRestaurantService implements DeleteRestaurant {
   async execute (params: DeleteRestaurant.Params): Promise<void> {
     const { restaurantId } = params
 
-    await this.restaurantRepository.delete({ restaurantId })
+    await this.restaurantRepository.delete({ itemId: restaurantId })
   }
 }

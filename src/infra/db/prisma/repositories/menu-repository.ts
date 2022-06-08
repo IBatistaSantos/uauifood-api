@@ -49,7 +49,7 @@ SaveMenuRepository {
   }
 
   async loadByRestaurantId (params: LoadMenuByRestaurantId.Params): Promise<LoadMenuByRestaurantId.Result> {
-    return this.prismaClient.menu.findMany({
+    const restaurants = await this.prismaClient.menu.findMany({
       where: {
         restaurantId: params.restaurantId
       },
@@ -62,6 +62,8 @@ SaveMenuRepository {
         }
       }
     })
+
+    return restaurants
   }
 
   async loadByNameAndRestaurantId (params: LoadMenuByNAmeAndRestaurantId.Params): Promise<LoadMenuByNAmeAndRestaurantId.Result> {

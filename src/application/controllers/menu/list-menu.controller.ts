@@ -8,7 +8,7 @@ type HttpRequest = {
   restaurantId: string
 }
 
-type Model = Error | {
+type Model = Error | Array<{
   id: string
   name: string
   description: string | null
@@ -18,7 +18,7 @@ type Model = Error | {
     id: string
     name: string
   }
-}
+}>
 
 export class GetMenuController extends Controller {
   constructor (private readonly getMenu: GetMenu) {

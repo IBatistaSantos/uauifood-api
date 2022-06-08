@@ -23,7 +23,7 @@ ListRestaurantRepository {
   async delete (params: DeleteRestaurantByIdRepository.Params): Promise<void> {
     await this.prismaClient.restaurant.update({
       where: {
-        id: params.restaurantId
+        id: params.itemId
       },
       data: {
         active: false

@@ -9,7 +9,7 @@ export namespace GetMenu {
     restaurantId: string
   }
 
-  export type Result = Error | {
+  export type Result = Error | Array<{
     id: string
     name: string
     description: string | null
@@ -19,5 +19,5 @@ export namespace GetMenu {
       id: string
       name: string
     }
-  }
+  }>
 }

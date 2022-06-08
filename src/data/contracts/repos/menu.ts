@@ -71,7 +71,7 @@ export namespace LoadMenuByRestaurantId {
     restaurantId: string
   }
 
-  export type Result = undefined |
+  export type Result = undefined | Array<
   {
     id: string
     name: string
@@ -82,6 +82,6 @@ export namespace LoadMenuByRestaurantId {
       id: string
       name: string
     }
-  }
+  }>
 
 }

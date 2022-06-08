@@ -22,7 +22,7 @@ describe('DeleteRestaurantService', () => {
       restaurantId: '1'
     })
 
-    expect(restaurantRepository.delete).toHaveBeenCalledWith({ restaurantId: '1' })
+    expect(restaurantRepository.delete).toHaveBeenCalledWith({ itemId: '1' })
     expect(restaurantRepository.delete).toHaveBeenCalledTimes(1)
   })
 })

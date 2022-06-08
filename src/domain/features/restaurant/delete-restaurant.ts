@@ -7,5 +7,4 @@ export namespace DeleteRestaurant {
   export type Params = {
     restaurantId: string
   }
-
 }
