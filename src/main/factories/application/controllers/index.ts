@@ -1,10 +1,4 @@
 export * from './authentication'
-export * from './create-restaurant'
-export * from './update-restaurant'
-export * from './details-restaurant'
-export * from './list-restaurant'
-export * from './delete-restaurant'
-export * from './create-menu'
-export * from './get-menu'
-export * from './update-menu'
-export * from './delete-menu'
+
+export * from './restaurant'
+export * from './menu'
