@@ -1,4 +1,5 @@
 import { RequiredFieldValidator } from './required-fieldr'
+import { OptionalFieldValidator } from './optional-field'
 import { Validator } from './validator'
 
 export class ValidationBuilder {
@@ -14,6 +15,11 @@ export class ValidationBuilder {
 
   required (): ValidationBuilder {
     this.validators.push(new RequiredFieldValidator(this.value, this.fieldName))
+    return this
+  }
+
+  optional (): ValidationBuilder {
+    this.validators.push(new OptionalFieldValidator(this.value, this.fieldName))
     return this
   }
 

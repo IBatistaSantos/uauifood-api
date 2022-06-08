@@ -8,8 +8,15 @@ export class ServerError extends Error {
 
 export class RequiredFieldError extends Error {
   constructor (fielName: string) {
-    super(`The field ${fielName} is required to be a number`)
+    super(`The field ${fielName} is required`)
     this.name = 'RequiredFieldError'
+  }
+}
+
+export class OptionalFieldError extends Error {
+  constructor (fielName: string) {
+    super(`The field ${fielName} is invalid`)
+    this.name = 'OptionalFieldError'
   }
 }
 
