@@ -12,6 +12,14 @@ export interface UpdateRestaurantRepository {
   update: (params: UpdateRestaurantRepository.Params) => Promise<UpdateRestaurantRepository.Result>
 }
 
+export interface SaveRestaurantRepository {
+  save: (params: SaveRestaurantRepository.Params) => Promise<SaveRestaurantRepository.Result>
+}
+
+export interface ListRestaurantRepository {
+  listAll: (params: ListRestaurantRepository.Params) => Promise<ListRestaurantRepository.Result>
+}
+
 export namespace UpdateRestaurantRepository {
   export type Params = {
     restaurantId: string
@@ -43,8 +51,21 @@ export namespace LoadRestaurantByNameRepository {
   }
 }
 
-export interface SaveRestaurantRepository {
-  save: (params: SaveRestaurantRepository.Params) => Promise<SaveRestaurantRepository.Result>
+export namespace ListRestaurantRepository {
+  export type Params = {
+    active?: boolean
+
+  }
+  export type Result = undefined | Array<{
+    id: string
+    name: string
+    typeCuisine: string
+    owner: {
+      id: string
+      name: string
+      email: string
+    }
+  }>
 }
 
 export namespace SaveRestaurantRepository {
@@ -72,5 +93,10 @@ export namespace LoadRestaurantByIdRepository {
     name: string
     typeCuisine: string
     ownerId: string
+    owner: {
+      id: string
+      name: string
+      email: string
+    }
   }
 }

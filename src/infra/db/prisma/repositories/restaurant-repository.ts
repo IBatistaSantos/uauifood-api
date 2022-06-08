@@ -1,16 +1,37 @@
 import { PrismaClient } from '@prisma/client'
-import { LoadRestaurantByIdRepository, LoadRestaurantByNameRepository, SaveRestaurantRepository, UpdateRestaurantRepository } from '@/data/contracts/repos'
+import { ListRestaurantRepository, LoadRestaurantByIdRepository, LoadRestaurantByNameRepository, SaveRestaurantRepository, UpdateRestaurantRepository } from '@/data/contracts/repos'
 import { TypeCuisine } from '@/domain/features'
 
-export class RestaurantRepositoryPrisma implements SaveRestaurantRepository, LoadRestaurantByNameRepository, LoadRestaurantByIdRepository, UpdateRestaurantRepository {
+export class RestaurantRepositoryPrisma implements
+SaveRestaurantRepository,
+LoadRestaurantByNameRepository,
+LoadRestaurantByIdRepository,
+UpdateRestaurantRepository,
+ListRestaurantRepository {
   constructor (
     private readonly prismaClient: PrismaClient
   ) {}
+
+  async listAll (params: ListRestaurantRepository.Params): Promise<ListRestaurantRepository.Result> {
+    const restaurants = await this.prismaClient.restaurant.findMany({
+      where: {
+        active: params.active
+      },
+      include: {
+        owner: true
+      }
+    })
+
+    return restaurants ?? []
+  }
 
   async loadById (params: LoadRestaurantByIdRepository.Params): Promise<LoadRestaurantByIdRepository.Result> {
     const restaurant = await this.prismaClient.restaurant.findFirst({
       where: {
         id: params.id
+      },
+      include: {
+        owner: true
       }
     })
 
