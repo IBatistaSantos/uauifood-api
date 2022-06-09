@@ -133,6 +133,22 @@ ListRestaurantRepository {
       return false
     }
 
-    return restaurant.owner.id === params.userId
+    const isOwner = restaurant.owner.id === params.userId
+
+    if (isOwner) {
+      return true
+    }
+
+    const employee = await this.prismaClient.employee.findFirst({
+      where: {
+        userId: params.userId
+      }
+    })
+
+    if (employee === null) {
+      return false
+    }
+
+    return employee.restaurantId === params.restaurantId
   }
 }
