@@ -20,6 +20,7 @@ model User {
     updatedAt   DateTime @default(now())
 
     restaurants Restaurant[]
+    employees  Employee[]
 
     @@map("users")
 }
@@ -43,11 +44,10 @@ model Restaurant {
     updatedAt   DateTime @default(now())
 
     menu Menu[]
+    employees Employee[]
 
     @@map("restaurants")
 }
-
-
 
 model Menu {
     id          String @id @default(uuid())
@@ -59,4 +59,40 @@ model Menu {
     restaurant Restaurant @relation(fields: [restaurantId], references: [id])
 
     @@map("menu")
+}
+
+model Employee {
+    id          String @id @default(uuid())
+    userId String
+    restaurantId String
+    active Boolean @default(true)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id])
+    restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+
+    @@map("employees")
+}
+
+
+model Invite {
+    id          String @id @default(uuid())
+    email       String
+    name String
+    code String
+    restaurantId String
+
+    status InviteStatus @default(PENDING)
+
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now())
+
+    @@map("invites")
+}
+
+enum InviteStatus {
+    ACCEPTED
+    REJECTED
+    PENDING
 }
