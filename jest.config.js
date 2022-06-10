@@ -3,6 +3,7 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**',
+    '!<rootDir>/src/infra/db/prisma/**/*.prisma',
     '!<rootDir>/src/**/index.ts'
   ],
   coverageDirectory: 'coverage',
