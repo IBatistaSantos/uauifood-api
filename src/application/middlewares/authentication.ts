@@ -34,6 +34,9 @@ export class AuthenticationMiddleware implements Middleware {
   private validate (authorization: string): boolean {
     const error = new RequiredFieldValidator(authorization, 'authorization').validate()
 
-    return !!error
+    if (error === undefined) {
+      return false
+    }
+    return true
   }
 }
