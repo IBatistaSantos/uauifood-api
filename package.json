@@ -20,13 +20,13 @@
     "jest": "^28.1.0",
     "jest-mock-extended": "^2.0.6",
     "lint-staged": "^12.3.5",
-    "prisma": "^3.14.0",
+    "prisma": "^3.15.1",
     "ts-jest": "^28.0.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "4.6.2"
   },
   "dependencies": {
-    "@prisma/client": "^3.14.0",
+    "@prisma/client": "^3.15.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -36,6 +36,7 @@
   },
   "scripts": {
     "dev": "tsnd --respawn --transpile-only -r dotenv/config src/main",
+    "prisma:generate": "npx prisma generate",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm run test -- --watch",
     "test:staged": "npm run test -- --findRelatedTests",
